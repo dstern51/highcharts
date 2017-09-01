@@ -59,7 +59,7 @@ gulp.task('js', function () {
 			config.bowerDir + '/bootstrap-sass/assets/javascripts/bootstrap.js',
 			config.bowerDir + '/highcharts/highstock.js',
 			config.bowerDir + '/highcharts/highcharts-more.js',
-			config.bowerDir + '/highcharts/themes/grid-light.js',
+			config.bowerDir + '/highcharts/themes/sand-signika.js',
 			config.srcDir + '/js/*.js'
 		])
 		.pipe(uglify('app.js', {

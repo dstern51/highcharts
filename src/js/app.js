@@ -9,6 +9,9 @@ jQuery(document).ready(function ($) {
 
 	var balanceChart;
 	var returnChart;
+	var curStep = 30;
+
+	var chartData, navigatorData;
 
 	$.ajax({
 		url: 'data/exampledata.json',
@@ -33,20 +36,16 @@ jQuery(document).ready(function ($) {
 				data[res[i][0]] = dataItem;
 			}
 
-			var chartData = [];
-			var navigatorData = returnPercentsPerYear.slice(1, returnPercentsPerYear.length);
+			chartData = [];
+			navigatorData = returnPercentsPerYear.slice(1, returnPercentsPerYear.length);
 			for (var i = 1; i < returnPercentsPerYear.length; i++) {
 				chartData.push(data[i]['Year ' + curYearIndex]);
-				xAxisCategories.push('Year ' + i);
+				xAxisCategories.push(i - 1);
 			}
 
 			balanceChart = Highcharts.chart('balance-chart', {
 		        chart: {
 		            type: 'column'
-		        },
-
-		        rangeSelector: {
-		            selected: 2
 		        },
 
 		        title: {
@@ -67,7 +66,18 @@ jQuery(document).ready(function ($) {
 		        ],
 
 		        xAxis: {
-		        	categories: xAxisCategories
+		        	categories: xAxisCategories,
+		        	crosshair: true,
+		        	labels: {
+		        		formatter: function() {
+		        			return 'Year ' + (this.value + 1);
+		        		}
+		        	}
+		        },
+
+		        tooltip: {
+		        	pointFormat: 'Balance: $ {point.y}',
+		        	shared: true
 		        },
 
 		        legend: {
@@ -88,17 +98,12 @@ jQuery(document).ready(function ($) {
 		        	column: {
 		        		color: balanceGraphColors[curYearIndex]
 		        	}
-		        },
+		        }
 		    });
-
 
 			returnChart = Highcharts.chart('return-chart', {
 		        chart: {
 		            type: 'column'
-		        },
-
-		        rangeSelector: {
-		            selected: 2
 		        },
 
 		        title: {
@@ -113,7 +118,20 @@ jQuery(document).ready(function ($) {
 		        ],
 
 		        xAxis: {
-		        	categories: xAxisCategories
+		        	categories: xAxisCategories,
+		        	crosshair: true,
+		        	min: 0,
+		        	max: 15,
+		        	labels: {
+		        		formatter: function() {
+		        			return 'Year ' + (this.value + 1);
+		        		}
+		        	}
+		        },
+
+		        tooltip: {
+		        	pointFormat: 'Return:  {point.y}%',
+		        	shared: true
 		        },
 
 		        legend: {
@@ -135,12 +153,18 @@ jQuery(document).ready(function ($) {
 		        		color: returnGraphColors[curYearIndex]
 		        	}
 		        },
+
+		        scrollbar: {
+		        	enabled: true
+		        }
 		    });
 		}
 	});
 
-	$(".go-prev-year").click(function() {
-		balanceChart.series[0].addPoint(['Year 31', Math.random() % 10 * 10000], true, true);
-		returnChart.series[0].addPoint(['Year 31', Math.random() % 100], true, true);
+	$(".go-next-year").click(function() {
+		
 	});
-}); 
+
+	$(".go-prev-year").click(function() {
+	});
+});
