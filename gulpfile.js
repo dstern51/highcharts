@@ -25,6 +25,13 @@ gulp.task('fonts', function () {
 		.pipe(gulp.dest(config.distDir + '/fonts'));
 });
 
+gulp.task('exampledata', function () {
+	return gulp.src([
+			'src/data/*'
+		])
+		.pipe(gulp.dest(config.distDir + '/data'));
+});
+
 gulp.task('images', function () {
 	return gulp.src([
 			'src/images/*'
@@ -85,4 +92,4 @@ gulp.task('serve', ['css'], function () {
 	gulp.watch(config.srcDir + '/**/*.js', ['js-watch']);
 });
 
-gulp.task('default', ['fonts', 'images', 'css', 'js', 'html', 'serve']);
+gulp.task('default', ['fonts', 'images', 'css', 'js', 'html', 'serve', 'exampledata']);
