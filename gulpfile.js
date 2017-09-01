@@ -50,6 +50,9 @@ gulp.task('js', function () {
 	return gulp.src([
 			config.bowerDir + '/jquery/dist/jquery.min.js',
 			config.bowerDir + '/bootstrap-sass/assets/javascripts/bootstrap.js',
+			config.bowerDir + '/highcharts/highstock.js',
+			config.bowerDir + '/highcharts/highcharts-more.js',
+			config.bowerDir + '/highcharts/themes/grid-light.js',
 			config.srcDir + '/js/*.js'
 		])
 		.pipe(uglify('app.js', {
