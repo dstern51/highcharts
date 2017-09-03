@@ -13,6 +13,7 @@
   ],
   "dependencies": {
     "bootstrap-sass": "~3.3.7",
-    "highcharts": "~5.0.14"
+    "highcharts": "~5.0.14",
+    "highcharts-draggable-points": "~2.0.5"
   }
 }

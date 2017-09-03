@@ -60,6 +60,7 @@ gulp.task('js', function () {
 			config.bowerDir + '/highcharts/highstock.js',
 			config.bowerDir + '/highcharts/highcharts-more.js',
 			config.bowerDir + '/highcharts/themes/sand-signika.js',
+			config.bowerDir + '/highcharts-draggable-points/draggable-points.js',
 			config.srcDir + '/js/*.js'
 		])
 		.pipe(uglify('app.js', {
